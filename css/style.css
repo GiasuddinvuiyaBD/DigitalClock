@@ -74,3 +74,8 @@ form input[type="reset"] {
 	padding: 4px 8px;
 	font-size: 15px;
 }
+/*wining message start here*/
+.success 
+{
+	text-align: center;
+}
