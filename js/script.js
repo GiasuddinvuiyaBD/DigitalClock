@@ -12,6 +12,7 @@ const p2BtnElm = document.querySelector('.p2Btn');
 
 // for showing success message 
 let winingElm = document.querySelector('#wining');
+let myImageElm = document.querySelector('#myImage');
 // input element select
 let inputNumberElm = document.querySelector('#inputNumber');
 let winScoreElm = document.querySelector('.winScore span');
@@ -19,14 +20,24 @@ let p1ScoreElm = document.querySelector('.p1Score span');
 let p2ScoreElm = document.querySelector('.p2Score span');
 
 
-
-
-
 // datal layer start here
 let winScor = 10;
 let p1Scor = 0;
 let p2Scor = 0;
 let trun = 'Trun on';
+
+
+// sound setting effect
+let submitSound = new Audio("audio-sound/submit-sound.wav");
+let errorSound = new Audio("audio-sound/error.wav");
+let reseSound = new Audio("audio-sound/submit-sound.wav");
+let successSound = new Audio("audio-sound/submit-sound.wav");
+let playerSound = new Audio("audio-sound/final-button.wav");
+
+
+
+
+
 
 // winiscore by default value
 winScoreElm.textContent = winScor;
@@ -59,6 +70,7 @@ function resetFromUI()
 	winingElm.textContent = '';
 	p1BtnElm.removeAttribute('disabled');
 	p2BtnElm.removeAttribute('disabled');
+	myImageElm.src = '';
 }
 // reset form data base
 function resetFromDataBase()
@@ -80,6 +92,7 @@ function submitBtnResetFormUI()
 	winingElm.textContent = '';
 	p1BtnElm.removeAttribute('disabled');
 	p2BtnElm.removeAttribute('disabled');
+	myImageElm.src = '';
 }
 
 function submitBtnReseFromDataBase()
@@ -106,6 +119,9 @@ submitBtnElm.addEventListener('submit',(evt) =>
 	// if not isError then our submit button will be work otherwise it won't be able to submit
 	if(!isError)
 	{
+		// style changing
+		 
+		 inputNumberElm.style.border = '1px solid #9e9e9ed1';
 		// receive input form input box
 		receiveValue(inputValue);
 		// reset input 
@@ -119,6 +135,11 @@ submitBtnElm.addEventListener('submit',(evt) =>
 		submitBtnResetFormUI();
 		// reset form data base
 		submitBtnReseFromDataBase();
+
+		// submit button sound
+		submitSound.play();
+	}else{
+		errorSound.play();
 	}
 });
 // input field validation function start here
@@ -128,7 +149,8 @@ function inputFieldValidate(input)
 	// NaN !== NaN results true if value is not real number
 	if(!input || input !== input)
 	{
-		alert(`Incorrect input field!!!`);
+		// console.log(`Incorrect input field!!!`);
+		inputNumberElm.style.border = '1px solid red';
 		isInValid = true;
 	}
 	return isInValid;
@@ -151,6 +173,8 @@ function resetInput()
 */
 p1BtnElm.addEventListener('click',(evt) => 
 {
+	// button sound effect
+	playerSound.play();
 	// p1Scor++;
 	// random number calling
 	p1Scor = randomNum(p1Scor)
@@ -173,6 +197,9 @@ function player1WinFun(p1Scor)
 	if(p1Scor === winScor)
 	{
 		winingElm.textContent = 'Player 1 is winner';
+		myImageElm.src = 'image/one.png';
+		// success sound
+		successSound.play();
 		// disabled function
 		disabledFun();
 	}
@@ -186,6 +213,8 @@ function player1WinFun(p1Scor)
 p2BtnElm.addEventListener('click',(evt) => 
 {
 	evt.preventDefault();
+	// button sound effect
+	playerSound.play();
 	// p2Scor++;
 	// random number calling
 	p2Scor = randomNum(p2Scor);
@@ -207,7 +236,9 @@ function player2WinFun(p2Scor)
 	if(p2Scor === winScor)
 	{
 		winingElm.textContent = 'Player 2 is winner';
-		// disable function
+		myImageElm.src = 'image/Player-2-emoji.png';
+		// success sound
+		successSound.play();
 		disabledFun();
 	}
 }
@@ -220,9 +251,10 @@ function player2WinFun(p2Scor)
 
 resetBtnElm.addEventListener('click',(evt) => 
 {
+	// sound effect 
+	reseSound.play();
 	// reset form data base
 	resetFromDataBase()
-
 	// rest form ui
 	resetFromUI()
 	
