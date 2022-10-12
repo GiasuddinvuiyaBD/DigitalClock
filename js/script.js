@@ -4,6 +4,9 @@
 // Day : Wednesday
 // Game player vs player
 
+
+(() => 
+{
 // button element select
 const submitBtnElm = document.querySelector('form');
 const resetBtnElm = document.querySelector('#resetBtn');
@@ -19,13 +22,11 @@ let winScoreElm = document.querySelector('.winScore span');
 let p1ScoreElm = document.querySelector('.p1Score span');
 let p2ScoreElm = document.querySelector('.p2Score span');
 
-
 // datal layer start here
 let winScor = 10;
 let p1Scor = 0;
 let p2Scor = 0;
 let trun = 'Trun on';
-
 
 // sound setting effect
 let submitSound = new Audio("audio-sound/submit-sound.wav");
@@ -33,10 +34,6 @@ let errorSound = new Audio("audio-sound/error.wav");
 let reseSound = new Audio("audio-sound/submit-sound.wav");
 let successSound = new Audio("audio-sound/submit-sound.wav");
 let playerSound = new Audio("audio-sound/final-button.wav");
-
-
-
-
 
 
 // winiscore by default value
@@ -48,14 +45,12 @@ function randomNum(max)
 	return Math.ceil(Math.random() * winScor)
 }
 
-
 // when player 1 or player 2 will be winner then i want to disabled p1 and p2 button
 function disabledFun()
 {
 	p1BtnElm.setAttribute('disabled','disabled');
 	p2BtnElm.setAttribute('disabled','disabled');
 }
-
 /*
    --------------------------
    That is just for rest button start 
@@ -84,7 +79,6 @@ function resetFromDataBase()
    when user click the submit button then all think will be rese without winscor value
    --------------------------
 */
-
 function submitBtnResetFormUI()
 {
 	p1ScoreElm.textContent = 0;
@@ -94,19 +88,17 @@ function submitBtnResetFormUI()
 	p2BtnElm.removeAttribute('disabled');
 	myImageElm.src = '';
 }
-
 function submitBtnReseFromDataBase()
 {
 	p1Scor = 0;
 	p2Scor = 0;
 }
 
-
-
-
-
-
-
+/*
+	----------------------------========================------------------------
+	---------------------------- Submit button Start Here ----------------------
+	----------------------------========================------------------------
+*/
 // Toking user input
 submitBtnElm.addEventListener('submit',(evt) => 
 {
@@ -120,7 +112,6 @@ submitBtnElm.addEventListener('submit',(evt) =>
 	if(!isError)
 	{
 		// style changing
-		 
 		 inputNumberElm.style.border = '1px solid #9e9e9ed1';
 		// receive input form input box
 		receiveValue(inputValue);
@@ -142,6 +133,74 @@ submitBtnElm.addEventListener('submit',(evt) =>
 		errorSound.play();
 	}
 });
+
+/*
+	----------------------------========================------------------------
+	---------------------------- Player button One Start Here ----------------------
+	----------------------------========================------------------------
+*/
+p1BtnElm.addEventListener('click',(evt) => 
+{
+	// button sound effect
+	playerSound.play();
+	// p1Scor++;
+	// random number calling
+	p1Scor = randomNum(p1Scor)
+
+	p1ScoreElm.textContent = p1Scor;
+	evt.preventDefault();
+	if(trun === 'Trun on')
+	{
+		// disable player1
+		p1BtnElm.setAttribute('disabled','disabled');
+		p2BtnElm.removeAttribute('disabled');
+	}
+	// if player1 values is match with winscor then player1 will be success	
+	player1WinFun(p1Scor);
+});
+
+
+/*
+	----------------------------========================------------------------
+	---------------------------- Player button Two Start Here ----------------------
+	----------------------------========================------------------------
+*/
+p2BtnElm.addEventListener('click',(evt) => 
+{
+	evt.preventDefault();
+	// button sound effect
+	playerSound.play();
+	// p2Scor++;
+	// random number calling
+	p2Scor = randomNum(p2Scor);
+	p2ScoreElm.textContent = p2Scor;
+	if(trun === 'Trun on')
+	{
+		
+		// disable player1
+		p2BtnElm.setAttribute('disabled','disabled');
+		p1BtnElm.removeAttribute('disabled');
+	}
+	// if player1 values is match with winscor then player1 will be success	
+	player2WinFun(p2Scor);
+});
+/*
+	----------------------------========================------------------------
+	---------------------------- Reset button  start Here ----------------------
+	----------------------------========================------------------------
+*/
+resetBtnElm.addEventListener('click',(evt) => 
+{
+	// sound effect 
+	reseSound.play();
+	// reset form data base
+	resetFromDataBase()
+	// rest form ui
+	resetFromUI()
+	
+});
+
+// ---------------------------- Submit button functionality ---------------------
 // input field validation function start here
 function inputFieldValidate(input)
 {
@@ -166,31 +225,8 @@ function resetInput()
 	inputNumberElm.value = '';
 }
 
-/*
-	--------------------------------------------
-		Player 1 is start here 
-	--------------------------------------------
-*/
-p1BtnElm.addEventListener('click',(evt) => 
-{
-	// button sound effect
-	playerSound.play();
-	// p1Scor++;
-	// random number calling
-	p1Scor = randomNum(p1Scor)
+// ----------------------- player1 funtionality Start here ---------------------------
 
-	p1ScoreElm.textContent = p1Scor;
-	evt.preventDefault();
-	if(trun === 'Trun on')
-	{
-		// disable player1
-		p1BtnElm.setAttribute('disabled','disabled');
-		p2BtnElm.removeAttribute('disabled');
-	}
-	// if player1 values is match with winscor then player1 will be success	
-	player1WinFun(p1Scor);
-	
-})
 // if player1 values is match with winscor then player1 will be success	
 function player1WinFun(p1Scor)
 {
@@ -205,30 +241,7 @@ function player1WinFun(p1Scor)
 	}
 }
 
-/*
-	--------------------------------------------
-		player 2 is start here 
-	--------------------------------------------
-*/
-p2BtnElm.addEventListener('click',(evt) => 
-{
-	evt.preventDefault();
-	// button sound effect
-	playerSound.play();
-	// p2Scor++;
-	// random number calling
-	p2Scor = randomNum(p2Scor);
-	p2ScoreElm.textContent = p2Scor;
-	if(trun === 'Trun on')
-	{
-		
-		// disable player1
-		p2BtnElm.setAttribute('disabled','disabled');
-		p1BtnElm.removeAttribute('disabled');
-	}
-	// if player1 values is match with winscor then player1 will be success	
-	player2WinFun(p2Scor);
-})
+// ----------------------- player2 funtionality Start here ---------------------------
 
 // if player1 values is match with winscor then player1 will be success	
 function player2WinFun(p2Scor)
@@ -242,21 +255,8 @@ function player2WinFun(p2Scor)
 		disabledFun();
 	}
 }
+})();
 
-/*
-	--------------------------------------------
-		reset button start here
-	--------------------------------------------
-*/
 
-resetBtnElm.addEventListener('click',(evt) => 
-{
-	// sound effect 
-	reseSound.play();
-	// reset form data base
-	resetFromDataBase()
-	// rest form ui
-	resetFromUI()
-	
-})
+
 
