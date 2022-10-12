@@ -14,15 +14,63 @@ body
 	color: #efefef;
 	background: #000;
 }
+
 .container 
 {
-    margin: 176px 0 0 0;
-    text-align: center;
-    font-size: 28px;
+    width: 450px;
+    margin: 20px 0 20px 541px;
+    padding: 12px 20px;
+    border: 1px solid #9e9e9ed1;
+    border-radius: 6px;
 }
 
+.container .gameHeading
+{
+	text-align: center;
+    font-size: 35px;
+}
+.winScore 
+{
+	margin-top: -10px;
+	text-align: center;
+}
 
+.container .p1Div 
+{
+	margin-right: 10px;
+	float: left;
+}
 
+.container .p2Div 
+{
+	overflow: hidden;
+}
 
+form input[type="text"] 
+{
+    width: 210px;
+    padding: 6px 8px;
+    font-size: 16px;
+    border: 1px solid #9e9e9e;
+    border-radius: 4px;
+    outline: none;
+}
 
+/*button desing start here*/
+form input[type="submit"], 
+form input[type="reset"] {
+    padding: 4px 11px;
+    font-size: 15px;
+}
 
+.playerBtn 
+{
+	margin: 15px 0;
+}
+
+.playerBtn button
+{
+	margin: 0 10px 0 0;
+	padding: 4px 8px;
+	font-size: 15px;
+}

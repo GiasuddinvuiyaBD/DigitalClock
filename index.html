@@ -8,14 +8,34 @@
 </head>
 <body>
   
-	<h2 id="unique">BootCamp Day 27 Task</h2>
-	
+	<h2 id="unique">BootCamp Day 31 Task</h2>
 
-		<div class="container">
-			<h2 class="clock"></h2>
+	<div class="container">
+		<head>
+			<h2 class="gameHeading"> Player vs Player</h2>
+		</head>
+		<div class="score">
+			<h2 class="winScore">Winning Score : <span>10</span></h2>
+			<div class="p1Div">
+				<p class="p1Score">Player-1 Score : <span>0</span></p>
+			</div>
+			<div class="p2Div">
+				<p class="p2Score">Player-2 Score : <span>0</span></p>
+			</div>
 		</div>
-
-
+		<!-- form element start here -->
+		<form action="#">
+			<input type="text" id="inputNumber" placeholder="Enter Number : " autocomplete="off">
+			<input type="submit" value="Submit" id="submitBtn">
+			<input type="reset" value="Reset" id="resetBtn">
+		</form>
+		<!-- button element start here -->
+		<div class="playerBtn">
+			<button class="p1Btn">Player-1</button>
+			<button class="p2Btn">Player-2</button>
+		</div>
+	</div>
+	
 	<script src="js/script.js"></script>
 	<!-- <script src="image/bookReading.js"></script> -->
 	<!-- <script src="js/exercise.js"></script> -->
